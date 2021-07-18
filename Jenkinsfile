@@ -20,4 +20,29 @@ pipeline {
             }
         }
     }
+    
+    post {
+        success {
+            emailext(
+                subject: "${env.JOB_NAME} na build [${env.BUILD_NUMBER}] foi deployado com sucesso :D",
+                body: "Verifique a saída da console do Job ${env.JOB_NAME} em [${env.BUILD_URL}] ",
+                to: "eliasadriano2010@gmail.com"
+            )
+        }
+        
+        failiure {
+            emailext(
+                subject: "${env.JOB_NAME} na build [${env.BUILD_NUMBER}] não pôde ser deployado",
+                body: "Verifique a saída da console do Job ${env.JOB_NAME} em [${env.BUILD_URL}] ",
+                to: "eliasadriano2010@gmail.com"
+            )
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
 }
