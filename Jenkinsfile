@@ -23,19 +23,15 @@ pipeline {
     
     post {
         success {
-            emailext(
-                subject: "${env.JOB_NAME} na build [${env.BUILD_NUMBER}] foi deployado com sucesso :D",
-                body: "Verifique a saída da console do Job ${env.JOB_NAME} em [${env.BUILD_URL}] ",
-                to: "eliasadriano2010@gmail.com"
-            )
+            mail to: 'eliasadriano2010@gmail.com.com',
+             subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
+             body: "Everything is good with ${env.BUILD_URL}"
         }
         
         failure {
-            emailext(
-                subject: "${env.JOB_NAME} na build [${env.BUILD_NUMBER}] não pôde ser deployado",
-                body: "Verifique a saída da console do Job ${env.JOB_NAME} em [${env.BUILD_URL}] ",
-                to: "eliasadriano2010@gmail.com"
-            )
+            mail to: 'eliasadriano2010@gmail.com.com',
+             subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+             body: "Something is wrong with ${env.BUILD_URL}"
         }
     }
     
