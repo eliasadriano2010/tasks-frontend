@@ -30,7 +30,7 @@ pipeline {
             )
         }
         
-        failiure {
+        failure {
             emailext(
                 subject: "${env.JOB_NAME} na build [${env.BUILD_NUMBER}] não pôde ser deployado",
                 body: "Verifique a saída da console do Job ${env.JOB_NAME} em [${env.BUILD_URL}] ",
